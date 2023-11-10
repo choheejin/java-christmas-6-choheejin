@@ -1,19 +1,16 @@
 package christmas.domain.human;
 
 import java.time.LocalDate;
-import java.util.List;
 
-public class Human {
+public class Human implements DateConsts {
     private final int money;
     private final int day;
-    private final LocalDate fullDate;
-    private final int weekDate;
+    private final int dayOfWeek;
 
     public Human(int money, int day) {
         this.money = money;
         this.day = day;
-        this.fullDate = LocalDate.of(2023, 12, day);
-        this.weekDate = fullDate.getDayOfWeek().getValue();
+        this.dayOfWeek = LocalDate.of(YEAR, MONTH, day).getDayOfWeek().getValue();
     }
 
     public boolean isMoneyExceedStandard(int std) {
@@ -29,17 +26,14 @@ public class Human {
     }
 
     public boolean isWeekday() {
-        List<Integer> weekday = List.of(1, 2, 3, 4, 7);
-        return weekday.contains(weekDate);
+        return WEEKDAY.contains(dayOfWeek);
     }
 
     public boolean isWeekend() {
-        List<Integer> weekend = List.of(5, 6);
-        return weekend.contains(weekDate);
+        return WEEKEND.contains(dayOfWeek);
     }
 
     public boolean isSpecialDay() {
-        List<Integer> specialDay = List.of(3, 10, 17, 24, 25, 31);
-        return specialDay.contains(day);
+        return SPECIAL_DAY.contains(day);
     }
 }
