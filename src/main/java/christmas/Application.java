@@ -7,6 +7,7 @@ import christmas.domain.human.BenefitAmount;
 import christmas.domain.human.Human;
 import christmas.domain.menu.Menu;
 import christmas.domain.human.Menus;
+import christmas.view.InputView;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,10 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
-        Human human = new Human(120_900, 25);
+        InputView inputView = new InputView();
+        int date = inputView.readDate();
+
+        Human human = new Human(120_900, date);
 
         Menus menus = new Menus(
                 List.of(
