@@ -6,7 +6,7 @@ import christmas.domain.event.GiftEventPolicy;
 import christmas.domain.human.BenefitAmount;
 import christmas.domain.human.Human;
 import christmas.domain.menu.Menu;
-import christmas.domain.menu.Menus;
+import christmas.domain.human.Menus;
 
 import java.util.List;
 import java.util.Map;
@@ -26,7 +26,7 @@ public class Application {
                 )
         );
 
-        Map<String, Integer> discountResult = new DiscountEventPolicy().getDiscountAmount(human, menus, true);
+        Map<String, Integer> discountResult = new DiscountEventPolicy().getDiscountAmount(human, menus);
         int giftCount = new GiftEventPolicy().getGiftCount(human);
 
         BenefitAmount benefitAmount = new BenefitAmount(discountResult);

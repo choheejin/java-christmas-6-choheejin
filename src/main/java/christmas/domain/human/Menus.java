@@ -1,4 +1,6 @@
-package christmas.domain.menu;
+package christmas.domain.human;
+
+import christmas.domain.menu.Menu;
 
 import java.util.List;
 
@@ -15,5 +17,16 @@ public class Menus {
 
     public Long getDessertCount() {
         return menus.stream().filter(menu -> menu.getCategory().equals("디저트")).count();
+    }
+
+    public boolean isMenuCountExceedStandard(int std) {
+        return menus.size() > std;
+    }
+
+    public boolean isOnlyBeverage() {
+        int menusSize = menus.size();
+        Long beverageCount = menus.stream().filter(menu -> menu.getCategory().equals("음료")).count();
+
+        return beverageCount.intValue() == menusSize;
     }
 }

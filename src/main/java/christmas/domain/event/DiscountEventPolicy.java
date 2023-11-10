@@ -1,17 +1,18 @@
 package christmas.domain.event;
 
+import christmas.domain.condition.ICondition;
 import christmas.domain.human.Human;
-import christmas.domain.menu.Menus;
+import christmas.domain.human.Menus;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class DiscountEventPolicy implements IEventPolicy {
+public class DiscountEventPolicy implements IEventPolicy, ICondition {
     private Map<String, Integer> result = new HashMap<>();
 
     @Override
-    public Map<String, Integer> getDiscountAmount(Human human, Menus menus, boolean condition) {
-        if (condition) {
+    public Map<String, Integer> getDiscountAmount(Human human, Menus menus) {
+        if (isAvailableToParticipateEvent(human)) {
             christmasEvent(human);
             weekdayEvent(human, menus);
             weekendEvent(human, menus);
