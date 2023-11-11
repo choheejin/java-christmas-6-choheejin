@@ -18,16 +18,26 @@ public class InputView {
     private static final int COUNT_IDX = 1;
     private static final int IDX_SIZE = 2;
 
+    private int date;
     private Map<String, Integer> inputMenu;
 
     public int readDate() {
         String input;
-        do {
+
+        try {
             System.out.println(InputMessage.READ_DATE.getMessage());
             input = Console.readLine().trim();
-        } while (isErrorOccurred(input));
 
-        return Integer.parseInt(input);
+            validateDate(input);
+
+            date = Integer.parseInt(input);
+        } catch (IllegalArgumentException exception) {
+            exception.printStackTrace();
+            System.out.println(ErrorMessage.NOT_VALIDATE_DATE.getMessage());
+            readDate();
+        }
+
+        return date;
     }
 
     public Map<String, Integer> readMenu() {
@@ -58,17 +68,6 @@ public class InputView {
         validateCount(inputSeparateByDash.get(COUNT_IDX));
 
         inputMenu.put(inputSeparateByDash.get(0), Integer.parseInt(inputSeparateByDash.get(1)));
-    }
-
-    private boolean isErrorOccurred(String input) {
-        try {
-            validateDate(input);
-        } catch (IllegalArgumentException exception) {
-            exception.printStackTrace();
-            System.out.println(ErrorMessage.NOT_VALIDATE_DATE.getMessage());
-            return true;
-        }
-        return false;
     }
 
     private void validateOrderForm(List<String> inputs) throws IllegalArgumentException {
