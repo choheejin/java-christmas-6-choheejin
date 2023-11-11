@@ -12,6 +12,8 @@ import java.util.Map;
 
 public class InputView {
     private static final String R_NUMBER = "^[\\d]*$";
+    private static final String SEPARATOR_COMMA = ",";
+    private static final String SEPARATOR_DASH = "-";
     private static final int DATE_START = 1;
     private static final int DATE_END = 31;
     private static final int MENU_IDX = 0;
@@ -32,7 +34,6 @@ public class InputView {
 
             date = Integer.parseInt(input);
         } catch (IllegalArgumentException exception) {
-            exception.printStackTrace();
             System.out.println(ErrorMessage.NOT_VALIDATE_DATE.getMessage());
             readDate();
         }
@@ -45,14 +46,12 @@ public class InputView {
             System.out.println(InputMessage.READ_MENU.getMessage());
             String input = Console.readLine().trim();
 
-            List<String> inputSeparateByComa = Arrays.stream(input.split(",")).toList();
+            List<String> inputSeparateByComa = Arrays.asList(input.split(SEPARATOR_COMMA, -1));
+
             inputMenu = new HashMap<>();
 
-            for (String i : inputSeparateByComa) {
-                initMenus(i);
-            }
+            initMenus(inputSeparateByComa);
         } catch (IllegalArgumentException exception) {
-            exception.printStackTrace();
             System.out.println(ErrorMessage.NOT_VALIDATE_MENU.getMessage());
             readMenu();
         }
@@ -60,14 +59,16 @@ public class InputView {
         return inputMenu;
     }
 
-    private void initMenus(String input) throws IllegalArgumentException {
-        List<String> inputSeparateByDash = Arrays.stream(input.split("-")).toList();
+    private void initMenus(List<String> inputs) throws IllegalArgumentException {
+        for (String input : inputs) {
+            List<String> inputSeparateByDash = Arrays.stream(input.split(SEPARATOR_DASH)).toList();
 
-        validateOrderForm(inputSeparateByDash);
-        validateMenu(inputSeparateByDash.get(MENU_IDX));
-        validateCount(inputSeparateByDash.get(COUNT_IDX));
+            validateOrderForm(inputSeparateByDash);
+            validateMenu(inputSeparateByDash.get(MENU_IDX));
+            validateCount(inputSeparateByDash.get(COUNT_IDX));
 
-        inputMenu.put(inputSeparateByDash.get(0), Integer.parseInt(inputSeparateByDash.get(1)));
+            inputMenu.put(inputSeparateByDash.get(MENU_IDX), Integer.parseInt(inputSeparateByDash.get(COUNT_IDX)));
+        }
     }
 
     private void validateOrderForm(List<String> inputs) throws IllegalArgumentException {
