@@ -18,6 +18,7 @@ public class Application {
 
         InputView inputView = new InputView();
         int date = inputView.readDate();
+        Map<String, Integer> menu = inputView.readMenu();
 
         Human human = new Human(120_900, date);
 
