@@ -30,6 +30,10 @@ public enum Menu {
         return category;
     }
 
+    public static boolean isCategoryMatch(String name, String category) {
+        return Arrays.stream(Menu.values()).anyMatch(menu -> menu.category.equals(category) && menu.name.equals(name));
+    }
+
     public static boolean isContainMenu(String name) {
         return Arrays.stream(Menu.values()).anyMatch(menu -> menu.name.equals(name));
     }

@@ -3,20 +3,21 @@ package christmas.domain.human;
 import christmas.domain.menu.Menu;
 
 import java.util.List;
+import java.util.Map;
 
 public class Menus {
-    private final List<Menu> menus;
+    private final Map<String, Integer> menus;
 
-    public Menus(List<Menu> menus) {
+    public Menus(Map<String, Integer> menus) {
         this.menus = menus;
     }
 
     public Long getMainCount() {
-        return menus.stream().filter(menu -> menu.getCategory().equals("메인")).count();
+        return menus.entrySet().stream().filter(menu -> Menu.isCategoryMatch(menu.getKey(), "메인")).count();
     }
 
     public Long getDessertCount() {
-        return menus.stream().filter(menu -> menu.getCategory().equals("디저트")).count();
+        return menus.entrySet().stream().filter(menu -> Menu.isCategoryMatch(menu.getKey(), "디저트")).count();
     }
 
     public boolean isMenuCountExceedStandard(int std) {
@@ -25,7 +26,7 @@ public class Menus {
 
     public boolean isOnlyBeverage() {
         int menusSize = menus.size();
-        Long beverageCount = menus.stream().filter(menu -> menu.getCategory().equals("음료")).count();
+        Long beverageCount = menus.entrySet().stream().filter(menu -> Menu.isCategoryMatch(menu.getKey(), "음료")).count();
 
         return beverageCount.intValue() == menusSize;
     }
