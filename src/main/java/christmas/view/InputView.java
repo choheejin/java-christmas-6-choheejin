@@ -1,6 +1,7 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.domain.condition.ICondition;
 import christmas.domain.menu.Menu;
 import christmas.view.consts.ErrorMessage;
 import christmas.view.consts.InputMessage;
@@ -10,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InputView {
+public class InputView implements ICondition {
     private static final String R_NUMBER = "^[\\d]*$";
     private static final String SEPARATOR_COMMA = ",";
     private static final String SEPARATOR_DASH = "-";
@@ -83,6 +84,14 @@ public class InputView {
         }
 
         if (inputMenu.containsKey(input)) {
+            throw new IllegalArgumentException();
+        }
+
+        if (isMeetsMenuCountConditions(inputMenu)) {
+            throw new IllegalArgumentException();
+        }
+
+        if (isMeetsMenuConditions(inputMenu)) {
             throw new IllegalArgumentException();
         }
     }
