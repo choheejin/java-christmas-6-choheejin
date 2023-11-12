@@ -30,6 +30,10 @@ public enum Menu {
         return category;
     }
 
+    public int getPrize() {
+        return prize;
+    }
+
     public static int getMenusPrize(String name) {
         Menu filterMenu = Arrays.stream(Menu.values()).filter(menu -> menu.name.equals(name)).findAny().orElseThrow();
         return filterMenu.prize;

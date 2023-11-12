@@ -22,6 +22,14 @@ public class GiftEventPolicy {
         return filterResult.intValue() == 0;
     }
 
+    public int getGiftDiscount() {
+        return result.entrySet()
+                .stream()
+                .map(entry -> entry.getKey().getPrize() * entry.getValue().intValue())
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
     public Map<Menu, Integer> getGiftResult() {
         return Collections.unmodifiableMap(result);
     }
