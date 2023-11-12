@@ -53,4 +53,10 @@ public class OutputView {
         System.out.println(OutputTittleMessage.BADGE.getMessage());
         System.out.println(badges.getLabel());
     }
+
+    public void displayRealFee(Money money, Money discount) {
+        DecimalFormat formatter = new DecimalFormat(AMOUNT_NOTATION);
+        System.out.println(OutputTittleMessage.REAL_FEE.getMessage());
+        System.out.printf(OutputDetailMessage.MONEY.getMessage(), formatter.format(money.compareTo(discount)));
+    }
 }

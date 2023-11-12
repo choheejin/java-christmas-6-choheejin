@@ -15,7 +15,6 @@ public class DiscountEventPolicy implements ICondition {
     private final Date date;
     private final GiftEventPolicy gift;
     private Map<String, Integer> result;
-    private int totalDiscount;
 
     public DiscountEventPolicy(Menus menus, Money money, Date date) {
         this.menus = menus;
@@ -24,13 +23,16 @@ public class DiscountEventPolicy implements ICondition {
 
         this.gift = new GiftEventPolicy(money);
         this.result = new HashMap<>();
-        this.totalDiscount = 0;
 
         setDiscountAmount();
-        setTotalDiscount();
+    }
+
+    public int getTotalDiscount() {
+        return result.values().stream().mapToInt(Integer::intValue).sum();
     }
 
     public boolean isTotalDiscountExceedStandard(int std) {
+        int totalDiscount = getTotalDiscount();
         return totalDiscount >= std;
     }
 
@@ -41,10 +43,6 @@ public class DiscountEventPolicy implements ICondition {
 
     public Map<String, Integer> getDiscountReceipt() {
         return result.entrySet().stream().filter(entry -> entry.getValue() != 0).collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
-    }
-
-    private void setTotalDiscount() {
-        totalDiscount = result.values().stream().mapToInt(Integer::intValue).sum();
     }
 
     private void setDiscountAmount() {
