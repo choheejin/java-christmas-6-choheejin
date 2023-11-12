@@ -14,6 +14,10 @@ public class Money implements Comparable<Money> {
         return fee;
     }
 
+    public boolean isNone() {
+        return fee <= 0;
+    }
+
     @Override
     public int compareTo(Money other) {
         return this.fee - other.fee;

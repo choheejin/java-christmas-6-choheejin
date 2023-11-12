@@ -40,14 +40,14 @@ public class OutputView {
 
     public void displayDiscountReceipt(Map<String, Integer> discountResult, boolean isNone) {
         DecimalFormat formatter = new DecimalFormat(AMOUNT_NOTATION);
-        System.out.println(OutputTittleMessage.DISCOUNT.getMessage());
+        System.out.println(OutputTittleMessage.DISCOUNT_RECEIPT.getMessage());
         if (isNone) {
             System.out.printf(OutputDetailMessage.NONE.getMessage());
             return;
         }
 
         discountResult.forEach((key, value) -> {
-            System.out.printf(OutputDetailMessage.EVENT_NAME.getMessage(), key);
+            System.out.printf(OutputDetailMessage.EVENT_NAME.getMessageNoSeparator(), key);
             System.out.printf(OutputDetailMessage.DISCOUNT.getMessage(), formatter.format(value));
         });
     }
@@ -61,5 +61,15 @@ public class OutputView {
         DecimalFormat formatter = new DecimalFormat(AMOUNT_NOTATION);
         System.out.println(OutputTittleMessage.REAL_FEE.getMessage());
         System.out.printf(OutputDetailMessage.MONEY.getMessage(), formatter.format(money.compareTo(discount)));
+    }
+
+    public void displayDiscountAmount(Money discount) {
+        DecimalFormat formatter = new DecimalFormat(AMOUNT_NOTATION);
+        System.out.println(OutputTittleMessage.DISCOUNT_AMOUNT.getMessage());
+        if(discount.isNone()) {
+            System.out.println(OutputDetailMessage.NONE.getMessage());
+            return;
+        }
+        System.out.printf(OutputDetailMessage.DISCOUNT.getMessage(), formatter.format(discount.getFee()));
     }
 }

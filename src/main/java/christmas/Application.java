@@ -30,5 +30,6 @@ public class Application {
         outputView.displayDiscountReceipt(discountEventPolicy.getDiscountReceipt(), discountEventPolicy.isDiscountAllNone());
         outputView.displayBadge(Badges.badgeMeetingConditions(discountEventPolicy));
         outputView.displayRealFee(money, discountAmount);
+        outputView.displayDiscountAmount(discountAmount);
     }
 }
