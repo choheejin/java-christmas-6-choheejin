@@ -4,7 +4,8 @@ public enum OutputDetailMessage {
     MENU("%s %d개"),
     MONEY("%s원"),
     GIFT("%s %d개"),
-    DISCOUNT("%s: -%s원"),
+    EVENT_NAME("%s: "),
+    DISCOUNT("-%s원"),
     NONE("없음");
     private final String message;
 

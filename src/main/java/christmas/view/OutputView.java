@@ -46,7 +46,10 @@ public class OutputView {
             return;
         }
 
-        discountResult.forEach((key, value) -> System.out.printf(OutputDetailMessage.DISCOUNT.getMessage(), key, formatter.format(value)));
+        discountResult.forEach((key, value) -> {
+            System.out.printf(OutputDetailMessage.EVENT_NAME.getMessage(), key);
+            System.out.printf(OutputDetailMessage.DISCOUNT.getMessage(), formatter.format(value));
+        });
     }
 
     public void displayBadge(Badges badges) {
