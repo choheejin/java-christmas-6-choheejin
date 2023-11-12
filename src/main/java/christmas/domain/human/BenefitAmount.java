@@ -11,13 +11,7 @@ public class BenefitAmount {
     }
 
     private int setTotalDiscount(Map<String, Integer> discountResult) {
-        Collection<Integer> values = discountResult.values();
-        int amount = 0;
-        for(int value: values) {
-            amount += value;
-        }
-
-        return amount;
+        return discountResult.values().stream().mapToInt(Integer::intValue).sum();
     }
 
     public boolean isTotalDiscountExceedStandard(int std) {
