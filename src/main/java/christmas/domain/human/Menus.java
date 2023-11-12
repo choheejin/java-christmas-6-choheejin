@@ -2,6 +2,7 @@ package christmas.domain.human;
 
 import christmas.domain.menu.Menu;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -34,5 +35,9 @@ public class Menus {
         Long beverageCount = menus.entrySet().stream().filter(menu -> Menu.isCategoryMatch(menu.getKey(), "음료")).count();
 
         return beverageCount.intValue() == menusSize;
+    }
+
+    public Map<String, Integer> getMenus() {
+        return Collections.unmodifiableMap(menus);
     }
 }
