@@ -12,6 +12,11 @@ import java.util.Map;
 
 public class OutputView {
     private static final String AMOUNT_NOTATION = "###,###";
+    private final DecimalFormat formatter;
+
+    public OutputView() {
+        this.formatter = new DecimalFormat(AMOUNT_NOTATION);
+    }
 
     public void displayMenu(Menus menus) {
         System.out.println(OutputTittleMessage.MENU.getMessage());
@@ -23,7 +28,6 @@ public class OutputView {
     }
 
     public void displayMoney(Money money) {
-        DecimalFormat formatter = new DecimalFormat(AMOUNT_NOTATION);
         System.out.println(OutputTittleMessage.MONEY.getMessage());
         System.out.printf(OutputDetailMessage.MONEY.getMessage(), formatter.format(money.getFee()));
         System.out.println();
@@ -43,7 +47,6 @@ public class OutputView {
     }
 
     public void displayDiscountReceipt(Map<String, Integer> discountResult, boolean isNone) {
-        DecimalFormat formatter = new DecimalFormat(AMOUNT_NOTATION);
         System.out.println(OutputTittleMessage.DISCOUNT_RECEIPT.getMessage());
         if (isNone) {
             System.out.printf(OutputDetailMessage.NONE.getMessage());
@@ -65,16 +68,14 @@ public class OutputView {
     }
 
     public void displayRealFee(Money money, Money discount) {
-        DecimalFormat formatter = new DecimalFormat(AMOUNT_NOTATION);
         System.out.println(OutputTittleMessage.REAL_FEE.getMessage());
         System.out.printf(OutputDetailMessage.MONEY.getMessage(), formatter.format(money.compareTo(discount)));
         System.out.println();
     }
 
     public void displayDiscountAmount(Money discount) {
-        DecimalFormat formatter = new DecimalFormat(AMOUNT_NOTATION);
         System.out.println(OutputTittleMessage.DISCOUNT_AMOUNT.getMessage());
-        if(discount.isNone()) {
+        if (discount.isNone()) {
             System.out.println(OutputDetailMessage.NONE.getMessage());
             System.out.println();
             return;
