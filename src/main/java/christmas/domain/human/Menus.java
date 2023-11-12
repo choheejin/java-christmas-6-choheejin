@@ -18,12 +18,22 @@ public class Menus {
         return prizes.stream().mapToInt(Integer::intValue).sum();
     }
 
-    public Long getMainCount() {
-        return menus.entrySet().stream().filter(menu -> Menu.isCategoryMatch(menu.getKey(), "메인")).count();
+    public int getMainCount() {
+        return menus
+                .entrySet()
+                .stream()
+                .filter(menu -> Menu.isCategoryMatch(menu.getKey(), "메인"))
+                .map(Map.Entry::getValue)
+                .mapToInt(Integer::intValue).sum();
     }
 
-    public Long getDessertCount() {
-        return menus.entrySet().stream().filter(menu -> Menu.isCategoryMatch(menu.getKey(), "디저트")).count();
+    public int getDessertCount() {
+        return menus
+                .entrySet()
+                .stream()
+                .filter(menu -> Menu.isCategoryMatch(menu.getKey(), "디저트"))
+                .map(Map.Entry::getValue)
+                .mapToInt(Integer::intValue).sum();
     }
 
     public boolean isMenuCountExceedStandard(int std) {

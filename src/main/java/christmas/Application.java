@@ -23,13 +23,14 @@ public class Application {
         DiscountEventPolicy discountEventPolicy = new DiscountEventPolicy(menus, money, date);
         GiftEventPolicy giftEventPolicy = new GiftEventPolicy(money);
         Money discountAmount = new Money(discountEventPolicy.getTotalDiscount());
+        Money benefitAmount = new Money(discountEventPolicy.getTotalBenefit());
 
         outputView.displayMenu(menus);
         outputView.displayMoney(money);
         outputView.displayGift(giftEventPolicy.getGiftResult(), giftEventPolicy.isGiftNone());
         outputView.displayDiscountReceipt(discountEventPolicy.getDiscountReceipt(), discountEventPolicy.isDiscountAllNone());
         outputView.displayBadge(Badges.badgeMeetingConditions(discountEventPolicy));
-        outputView.displayRealFee(money, discountAmount);
+        outputView.displayRealFee(money, benefitAmount);
         outputView.displayDiscountAmount(discountAmount);
     }
 }

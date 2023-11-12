@@ -27,6 +27,16 @@ public class DiscountEventPolicy implements ICondition {
         setDiscountAmount();
     }
 
+    public int getTotalBenefit() {
+        return result
+                .entrySet()
+                .stream()
+                .filter(entry -> !entry.getKey().equals("증정 이벤트"))
+                .map(Map.Entry::getValue)
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
     public int getTotalDiscount() {
         return result.values().stream().mapToInt(Integer::intValue).sum();
     }
@@ -66,7 +76,7 @@ public class DiscountEventPolicy implements ICondition {
     private void weekdayEvent() {
         int discount = 0;
         if (date.isWeekday()) {
-            discount = 2_023 * menus.getDessertCount().intValue();
+            discount = 2_023 * menus.getDessertCount();
         }
         result.put("평일 할인", discount);
     }
@@ -74,7 +84,7 @@ public class DiscountEventPolicy implements ICondition {
     private void weekendEvent() {
         int discount = 0;
         if (date.isWeekend()) {
-            discount = 2_023 * menus.getMainCount().intValue();
+            discount = 2_023 * menus.getMainCount();
         }
         result.put("주말 할인", discount);
     }
@@ -88,7 +98,7 @@ public class DiscountEventPolicy implements ICondition {
     }
 
     private void giftEvent() {
-        if(!gift.isGiftNone()) {
+        if (!gift.isGiftNone()) {
             result.put("증정 이벤트", gift.getGiftDiscount());
         }
     }
