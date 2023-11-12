@@ -23,13 +23,10 @@ public class Application {
         Menus menus = new Menus(inputView.readMenu());
         Money money = new Money(menus.getTotalOrderAmount());
 
-        Map<String, Integer> discountResult = new DiscountEventPolicy().getDiscountAmount(menus, money, date);
-        int giftCount = new GiftEventPolicy().getGiftCount(money);
-
-        BenefitAmount benefitAmount = new BenefitAmount(discountResult);
+        DiscountEventPolicy discountEventPolicy = new DiscountEventPolicy(menus, money, date);
+        GiftEventPolicy giftEventPolicy = new GiftEventPolicy(money);
 
         outputView.displayMenu(menus);
         outputView.displayMoney(money);
-        outputView.displayGift(giftCount);
     }
 }
