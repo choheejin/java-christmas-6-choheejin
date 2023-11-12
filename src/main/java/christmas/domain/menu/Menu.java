@@ -30,6 +30,11 @@ public enum Menu {
         return category;
     }
 
+    public static int getMenusPrize(String name) {
+        Menu filterMenu = Arrays.stream(Menu.values()).filter(menu -> menu.name.equals(name)).findAny().orElseThrow();
+        return filterMenu.prize;
+    }
+
     public static boolean isCategoryMatch(String name, String category) {
         return Arrays.stream(Menu.values()).anyMatch(menu -> menu.category.equals(category) && menu.name.equals(name));
     }

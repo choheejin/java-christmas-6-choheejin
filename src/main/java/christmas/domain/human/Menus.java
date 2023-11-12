@@ -12,6 +12,11 @@ public class Menus {
         this.menus = menus;
     }
 
+    public int getTotalOrderAmount() {
+        List<Integer> prizes = menus.entrySet().stream().map(menu -> Menu.getMenusPrize(menu.getKey()) * menu.getValue()).toList();
+        return prizes.stream().mapToInt(Integer::intValue).sum();
+    }
+
     public Long getMainCount() {
         return menus.entrySet().stream().filter(menu -> Menu.isCategoryMatch(menu.getKey(), "메인")).count();
     }

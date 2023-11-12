@@ -1,7 +1,7 @@
 package christmas.domain.condition;
 
-import christmas.domain.human.Human;
 import christmas.domain.human.Menus;
+import christmas.domain.human.Money;
 
 public interface ICondition {
     default boolean IsMeetsMenuConditions(Menus menus) {
@@ -12,7 +12,7 @@ public interface ICondition {
         return !menus.isMenuCountExceedStandard(20);
     }
 
-    default boolean isAvailableToParticipateEvent(Human human) {
-        return human.isMoneyExceedStandard(10_000);
+    default boolean isAvailableToParticipateEvent(Money money) {
+        return money.isMoneyExceedStandard(10_000);
     }
 }

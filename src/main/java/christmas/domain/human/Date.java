@@ -2,19 +2,13 @@ package christmas.domain.human;
 
 import java.time.LocalDate;
 
-public class Human implements DateConsts {
-    private final int money;
+public class Date implements DateConsts{
     private final int day;
     private final int dayOfWeek;
 
-    public Human(int money, int day) {
-        this.money = money;
+    public Date(int day) {
         this.day = day;
         this.dayOfWeek = LocalDate.of(YEAR, MONTH, day).getDayOfWeek().getValue();
-    }
-
-    public boolean isMoneyExceedStandard(int std) {
-        return money >= std;
     }
 
     public boolean isDayBelowStandard(int std) {
