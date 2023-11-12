@@ -1,6 +1,6 @@
 package christmas.domain.badge;
 
-import christmas.domain.human.BenefitAmount;
+import christmas.domain.event.DiscountEventPolicy;
 
 import java.util.Arrays;
 
@@ -22,9 +22,9 @@ public enum Badges {
         return label;
     }
 
-    public static Badges badgeMeetingConditions(BenefitAmount benefitAmount) {
+    public static Badges badgeMeetingConditions(DiscountEventPolicy discountEventPolicy) {
         return Arrays.stream(Badges.values())
-                .filter(i -> benefitAmount.isTotalDiscountExceedStandard(i.money))
+                .filter(i -> discountEventPolicy.isTotalDiscountExceedStandard(i.money))
                 .findAny()
                 .orElseThrow();
     }

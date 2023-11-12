@@ -1,5 +1,6 @@
 package christmas;
 
+import christmas.domain.badge.Badges;
 import christmas.domain.event.DiscountEventPolicy;
 import christmas.domain.event.GiftEventPolicy;
 import christmas.domain.human.Date;
