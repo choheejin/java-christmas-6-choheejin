@@ -2,6 +2,7 @@ package christmas.view;
 
 import christmas.domain.human.Menus;
 import christmas.domain.human.Money;
+import christmas.domain.menu.Menu;
 import christmas.view.consts.OutputDetailMessage;
 import christmas.view.consts.OutputTittleMessage;
 
@@ -26,12 +27,13 @@ public class OutputView {
     }
 
 
-    public void displayGift(int giftCount) {
+    public void displayGift(Map<Menu, Integer> giftCount, boolean isNone) {
         System.out.println(OutputTittleMessage.GIFT.getMessage());
-        if(giftCount == 0) {
+        if (isNone) {
             System.out.printf(OutputDetailMessage.NONE.getMessage());
             return;
         }
-        System.out.printf(OutputDetailMessage.GIFT.getMessage(), giftCount);
+
+        giftCount.forEach((key, value) -> System.out.printf(OutputDetailMessage.GIFT.getMessage(), key.getMenuName(), value));
     }
 }

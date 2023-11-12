@@ -26,8 +26,8 @@ public enum Menu {
         this.prize = prize;
     }
 
-    public String getCategory() {
-        return category;
+    public String getMenuName() {
+        return name;
     }
 
     public int getPrize() {

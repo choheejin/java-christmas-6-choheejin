@@ -1,16 +1,12 @@
 package christmas;
 
-import christmas.domain.badge.Badges;
 import christmas.domain.event.DiscountEventPolicy;
 import christmas.domain.event.GiftEventPolicy;
-import christmas.domain.human.BenefitAmount;
 import christmas.domain.human.Date;
 import christmas.domain.human.Menus;
 import christmas.domain.human.Money;
 import christmas.view.InputView;
 import christmas.view.OutputView;
-
-import java.util.Map;
 
 public class Application {
     public static void main(String[] args) {
@@ -28,5 +24,6 @@ public class Application {
 
         outputView.displayMenu(menus);
         outputView.displayMoney(money);
+        outputView.displayGift(giftEventPolicy.getGiftResult(), giftEventPolicy.isGiftNone());
     }
 }
