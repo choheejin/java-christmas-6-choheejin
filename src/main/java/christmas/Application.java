@@ -26,6 +26,7 @@ public class Application {
         outputView.displayMenu(menus);
         outputView.displayMoney(money);
         outputView.displayGift(giftEventPolicy.getGiftResult(), giftEventPolicy.isGiftNone());
-        outputView.displayDiscount(discountEventPolicy.getDiscountReceipt(), discountEventPolicy.isDiscountAllNone());
+        outputView.displayDiscountReceipt(discountEventPolicy.getDiscountReceipt(), discountEventPolicy.isDiscountAllNone());
+        outputView.displayBadge(Badges.badgeMeetingConditions(discountEventPolicy));
     }
 }

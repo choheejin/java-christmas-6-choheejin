@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.domain.badge.Badges;
 import christmas.domain.human.Menus;
 import christmas.domain.human.Money;
 import christmas.domain.menu.Menu;
@@ -37,7 +38,7 @@ public class OutputView {
         giftCount.forEach((key, value) -> System.out.printf(OutputDetailMessage.GIFT.getMessage(), key.getMenuName(), value));
     }
 
-    public void displayDiscount(Map<String, Integer> discountResult, boolean isNone) {
+    public void displayDiscountReceipt(Map<String, Integer> discountResult, boolean isNone) {
         DecimalFormat formatter = new DecimalFormat(AMOUNT_NOTATION);
         System.out.println(OutputTittleMessage.DISCOUNT.getMessage());
         if (isNone) {
@@ -46,5 +47,10 @@ public class OutputView {
         }
 
         discountResult.forEach((key, value) -> System.out.printf(OutputDetailMessage.DISCOUNT.getMessage(), key, formatter.format(value)));
+    }
+
+    public void displayBadge(Badges badges) {
+        System.out.println(OutputTittleMessage.BADGE.getMessage());
+        System.out.println(badges.getLabel());
     }
 }

@@ -4,7 +4,8 @@ public enum OutputTittleMessage {
     MENU("<주문 메뉴>"),
     MONEY("<할인 전 총주문 금액>"),
     GIFT("<증정 메뉴>"),
-    DISCOUNT("<혜택 내역>");
+    DISCOUNT("<혜택 내역>"),
+    BADGE("<12월 이벤트 배지>");
 
     private final String message;
 
