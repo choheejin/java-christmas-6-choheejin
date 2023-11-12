@@ -30,5 +30,6 @@ public class Application {
 
         outputView.displayMenu(menus);
         outputView.displayMoney(money);
+        outputView.displayGift(giftCount);
     }
 }

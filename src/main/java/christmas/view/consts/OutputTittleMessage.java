@@ -2,7 +2,8 @@ package christmas.view.consts;
 
 public enum OutputTittleMessage {
     MENU("<주문 메뉴>"),
-    MONEY("<할인 전 총주문 금액>");
+    MONEY("<할인 전 총주문 금액>"),
+    GIFT("<증정 메뉴>");
 
     private final String message;
 
