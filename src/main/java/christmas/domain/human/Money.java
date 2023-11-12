@@ -9,4 +9,8 @@ public class Money {
     public boolean isMoneyExceedStandard(int std) {
         return fee >= std;
     }
+
+    public int getFee() {
+        return fee;
+    }
 }

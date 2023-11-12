@@ -29,5 +29,6 @@ public class Application {
         BenefitAmount benefitAmount = new BenefitAmount(discountResult);
 
         outputView.displayMenu(menus);
+        outputView.displayMoney(money);
     }
 }
