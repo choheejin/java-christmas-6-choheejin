@@ -2,7 +2,7 @@ package christmas.view;
 
 import christmas.domain.badge.Badges;
 import christmas.domain.event.Event;
-import christmas.domain.human.Menus;
+import christmas.domain.human.Orders;
 import christmas.domain.human.Money;
 import christmas.domain.menu.Menu;
 import christmas.view.consts.OutputDetailMessage;
@@ -19,9 +19,9 @@ public class OutputView {
         this.formatter = new DecimalFormat(AMOUNT_NOTATION);
     }
 
-    public void displayMenu(Menus menus) {
+    public void displayMenu(Orders orders) {
         System.out.println(OutputTittleMessage.MENU.getMessage());
-        menus.getMenus()
+        orders.getOrders()
                 .forEach((menu, count) ->
                         System.out.printf((OutputDetailMessage.MENU.getMessage()), menu, count)
                 );

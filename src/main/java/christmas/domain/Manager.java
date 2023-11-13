@@ -2,10 +2,10 @@ package christmas.domain;
 
 import christmas.domain.badge.Badges;
 import christmas.domain.event.Benefit;
-import christmas.domain.event.DiscountEventPolicy;
-import christmas.domain.event.GiftEventPolicy;
+import christmas.domain.event.DiscountEvent;
+import christmas.domain.event.GiftEvent;
 import christmas.domain.human.Date;
-import christmas.domain.human.Menus;
+import christmas.domain.human.Orders;
 import christmas.domain.human.Money;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -15,12 +15,12 @@ public class Manager {
     private final OutputView outputView;
 
     private Date date;
-    private Menus menus;
+    private Orders orders;
     private Money money;
     private Money discountAmount;
     private Money benefitAmount;
-    private GiftEventPolicy giftEventPolicy;
-    private DiscountEventPolicy discountEventPolicy;
+    private GiftEvent giftEvent;
+    private DiscountEvent discountEvent;
     private Benefit benefit;
 
     public Manager() {
@@ -36,26 +36,26 @@ public class Manager {
 
     private void read() {
         date = new Date(inputView.readDate());
-        menus = new Menus(inputView.readMenu());
+        orders = new Orders(inputView.readMenu());
     }
 
     private void calculate() {
-        money = new Money(menus.getTotalOrderAmount());
+        money = new Money(orders.getTotalOrderAmount());
 
-        discountEventPolicy = new DiscountEventPolicy(menus, money, date);
-        giftEventPolicy = new GiftEventPolicy(money);
-        benefit = new Benefit(discountEventPolicy, giftEventPolicy);
+        discountEvent = new DiscountEvent(orders, money, date);
+        giftEvent = new GiftEvent(money);
+        benefit = new Benefit(discountEvent, giftEvent);
 
-        discountAmount = new Money(discountEventPolicy.getTotalDiscount());
+        discountAmount = new Money(discountEvent.getTotalDiscount());
         benefitAmount = new Money(benefit.getTotalBenefit());
     }
 
     private void display() {
         outputView.displayStart();
-        outputView.displayMenu(menus);
+        outputView.displayMenu(orders);
         outputView.displayMoney(money);
         outputView.displayEvent();
-        outputView.displayGift(giftEventPolicy.getGiftResult(), giftEventPolicy.isGiftNone());
+        outputView.displayGift(giftEvent.getGiftResult(), giftEvent.isGiftNone());
         outputView.displayBenefitReceipt(benefit.getBenefitReceipt(), benefit.isNoneOfBenefit());
         outputView.displayDiscountAmount(benefitAmount);
         outputView.displayRealFee(money.compareTo(discountAmount));

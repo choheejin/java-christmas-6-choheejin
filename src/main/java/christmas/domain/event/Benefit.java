@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Benefit {
-    private final DiscountEventPolicy discountEventPolicy;
-    private final GiftEventPolicy giftEventPolicy;
+    private final DiscountEvent discountEventPolicy;
+    private final GiftEvent giftEventPolicy;
 
-    public Benefit(DiscountEventPolicy discountEventPolicy, GiftEventPolicy giftEventPolicy) {
+    public Benefit(DiscountEvent discountEventPolicy, GiftEvent giftEventPolicy) {
         this.discountEventPolicy = discountEventPolicy;
         this.giftEventPolicy = giftEventPolicy;
     }

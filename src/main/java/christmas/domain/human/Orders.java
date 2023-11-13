@@ -6,20 +6,20 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class Menus {
-    private final Map<String, Integer> menus;
+public class Orders {
+    private final Map<String, Integer> orders;
 
-    public Menus(Map<String, Integer> menus) {
-        this.menus = menus;
+    public Orders(Map<String, Integer> orders) {
+        this.orders = orders;
     }
 
     public int getTotalOrderAmount() {
-        List<Integer> prizes = menus.entrySet().stream().map(menu -> Menu.getMenusPrize(menu.getKey()) * menu.getValue()).toList();
+        List<Integer> prizes = orders.entrySet().stream().map(menu -> Menu.getMenusPrize(menu.getKey()) * menu.getValue()).toList();
         return prizes.stream().mapToInt(Integer::intValue).sum();
     }
 
     public int getMainCount() {
-        return menus
+        return orders
                 .entrySet()
                 .stream()
                 .filter(menu -> Menu.isCategoryMatch(menu.getKey(), "메인"))
@@ -28,7 +28,7 @@ public class Menus {
     }
 
     public int getDessertCount() {
-        return menus
+        return orders
                 .entrySet()
                 .stream()
                 .filter(menu -> Menu.isCategoryMatch(menu.getKey(), "디저트"))
@@ -37,17 +37,17 @@ public class Menus {
     }
 
     public boolean isMenuCountExceedStandard(int std) {
-        return menus.size() > std;
+        return orders.size() > std;
     }
 
     public boolean isOnlyBeverage() {
-        int menusSize = menus.size();
-        Long beverageCount = menus.entrySet().stream().filter(menu -> Menu.isCategoryMatch(menu.getKey(), "음료")).count();
+        int orderCount = orders.size();
+        Long beverageCount = orders.entrySet().stream().filter(menu -> Menu.isCategoryMatch(menu.getKey(), "음료")).count();
 
-        return beverageCount.intValue() == menusSize;
+        return beverageCount.intValue() == orderCount;
     }
 
-    public Map<String, Integer> getMenus() {
-        return Collections.unmodifiableMap(menus);
+    public Map<String, Integer> getOrders() {
+        return Collections.unmodifiableMap(orders);
     }
 }

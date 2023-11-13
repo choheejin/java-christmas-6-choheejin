@@ -2,23 +2,23 @@ package christmas.domain.event;
 
 import christmas.domain.condition.ICondition;
 import christmas.domain.human.Date;
-import christmas.domain.human.Menus;
+import christmas.domain.human.Orders;
 import christmas.domain.human.Money;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class DiscountEventPolicy implements ICondition {
+public class DiscountEvent implements ICondition {
     private static final int START_DATE = 1;
     private static final int END_DATE = 25;
-    private final Menus menus;
+    private final Orders orders;
     private final Money money;
     private final Date date;
     private Map<Event, Integer> result;
 
-    public DiscountEventPolicy(Menus menus, Money money, Date date) {
-        this.menus = menus;
+    public DiscountEvent(Orders orders, Money money, Date date) {
+        this.orders = orders;
         this.money = money;
         this.date = date;
 
@@ -60,7 +60,7 @@ public class DiscountEventPolicy implements ICondition {
     private void weekdayEvent() {
         int discount = 0;
         if (date.isWeekday()) {
-            discount = Event.getWeekDayDiscount(menus.getDessertCount());
+            discount = Event.getWeekDayDiscount(orders.getDessertCount());
         }
         result.put(Event.WEEKDAY, discount);
     }
@@ -68,7 +68,7 @@ public class DiscountEventPolicy implements ICondition {
     private void weekendEvent() {
         int discount = 0;
         if (date.isWeekend()) {
-            discount = Event.getWeekEndDiscount(menus.getMainCount());
+            discount = Event.getWeekEndDiscount(orders.getMainCount());
         }
         result.put(Event.WEEKEND, discount);
     }

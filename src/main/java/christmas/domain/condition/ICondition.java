@@ -1,18 +1,18 @@
 package christmas.domain.condition;
 
-import christmas.domain.human.Menus;
+import christmas.domain.human.Orders;
 import christmas.domain.human.Money;
 
 import java.util.Map;
 
 public interface ICondition {
     default boolean isMeetsMenuConditions(Map<String, Integer> inputMenu) {
-        Menus menus = new Menus(inputMenu);
+        Orders menus = new Orders(inputMenu);
         return menus.isOnlyBeverage();
     }
 
     default boolean isMeetsMenuCountConditions(Map<String, Integer> inputMenu) {
-        Menus menus = new Menus(inputMenu);
+        Orders menus = new Orders(inputMenu);
         return menus.isMenuCountExceedStandard(20);
     }
 

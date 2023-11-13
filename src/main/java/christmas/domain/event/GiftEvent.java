@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class GiftEventPolicy {
+public class GiftEvent {
     private final Money money;
     private Map<Menu, Integer> result;
 
-    public GiftEventPolicy(Money money) {
+    public GiftEvent(Money money) {
         this.money = money;
         this.result = new HashMap<>();
         setGiftChampagne();
