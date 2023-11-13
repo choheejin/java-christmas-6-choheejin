@@ -58,7 +58,7 @@ public class Manager {
         outputView.displayGift(giftEventPolicy.getGiftResult(), giftEventPolicy.isGiftNone());
         outputView.displayBenefitReceipt(benefit.getBenefitReceipt(), benefit.isNoneOfBenefit());
         outputView.displayDiscountAmount(benefitAmount);
-        outputView.displayRealFee(money, discountAmount);
+        outputView.displayRealFee(money.compareTo(discountAmount));
         outputView.displayBadge(Badges.badgeMeetingConditions(benefit));
     }
 }

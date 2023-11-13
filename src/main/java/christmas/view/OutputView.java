@@ -56,7 +56,7 @@ public class OutputView {
         }
 
         discountResult.forEach((key, value) -> {
-            System.out.printf(OutputDetailMessage.EVENT_NAME.getMessageNoSeparator(), key);
+            System.out.printf(OutputDetailMessage.EVENT_NAME.getMessageNoSeparator(), key.getName());
             System.out.printf(OutputDetailMessage.DISCOUNT.getMessage(), formatter.format(value));
         });
         System.out.println();
@@ -68,9 +68,9 @@ public class OutputView {
         System.out.println();
     }
 
-    public void displayRealFee(Money money, Money discount) {
+    public void displayRealFee(int realFee) {
         System.out.println(OutputTittleMessage.REAL_FEE.getMessage());
-        System.out.printf(OutputDetailMessage.MONEY.getMessage(), formatter.format(money.compareTo(discount)));
+        System.out.printf(OutputDetailMessage.MONEY.getMessage(), formatter.format(realFee));
         System.out.println();
     }
 
