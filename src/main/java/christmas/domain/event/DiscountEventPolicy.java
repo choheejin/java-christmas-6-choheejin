@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class DiscountEventPolicy implements ICondition {
+    private static final int START_DATE = 1;
+    private static final int END_DATE = 25;
     private final Menus menus;
     private final Money money;
     private final Date date;
@@ -31,7 +33,7 @@ public class DiscountEventPolicy implements ICondition {
         return result
                 .entrySet()
                 .stream()
-                .filter(entry -> !entry.getKey().equals("증정 이벤트"))
+                .filter(entry -> !entry.getKey().equals(Event.GIFT.getName()))
                 .map(Map.Entry::getValue)
                 .mapToInt(Integer::intValue)
                 .sum();
@@ -67,39 +69,39 @@ public class DiscountEventPolicy implements ICondition {
 
     private void christmasEvent() {
         int discount = 0;
-        if (date.isDayBelowStandard(25)) {
-            discount = 1000 + 100 * date.getDifferenceBaseDate(1);
+        if (date.isDayBelowStandard(END_DATE)) {
+            discount = Event.getChristmasDiscount(date.getDifferenceBaseDate(START_DATE));
         }
-        result.put("크리스마스 디데이 할인", discount);
+        result.put(Event.CHRISTMAS.getName(), discount);
     }
 
     private void weekdayEvent() {
         int discount = 0;
         if (date.isWeekday()) {
-            discount = 2_023 * menus.getDessertCount();
+            discount = Event.getWeekDayDiscount(menus.getDessertCount());
         }
-        result.put("평일 할인", discount);
+        result.put(Event.WEEKDAY.getName(), discount);
     }
 
     private void weekendEvent() {
         int discount = 0;
         if (date.isWeekend()) {
-            discount = 2_023 * menus.getMainCount();
+            discount = Event.getWeekEndDiscount(menus.getMainCount());
         }
-        result.put("주말 할인", discount);
+        result.put(Event.WEEKEND.getName(), discount);
     }
 
     private void specialEvent() {
         int discount = 0;
         if (date.isSpecialDay()) {
-            discount = 1000;
+            discount = Event.getSpecialDiscount();
         }
-        result.put("특별 할인", discount);
+        result.put(Event.SPECIAL.getName(), discount);
     }
 
     private void giftEvent() {
         if (!gift.isGiftNone()) {
-            result.put("증정 이벤트", gift.getGiftDiscount());
+            result.put(Event.GIFT.getName(), gift.getGiftDiscount());
         }
     }
 }
