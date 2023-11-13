@@ -8,12 +8,12 @@ import java.util.Map;
 public interface ICondition {
     default boolean isMeetsMenuConditions(Map<String, Integer> inputMenu) {
         Menus menus = new Menus(inputMenu);
-        return !menus.isOnlyBeverage();
+        return menus.isOnlyBeverage();
     }
 
     default boolean isMeetsMenuCountConditions(Map<String, Integer> inputMenu) {
         Menus menus = new Menus(inputMenu);
-        return !menus.isMenuCountExceedStandard(20);
+        return menus.isMenuCountExceedStandard(20);
     }
 
     default boolean isAvailableToParticipateEvent(Money money) {

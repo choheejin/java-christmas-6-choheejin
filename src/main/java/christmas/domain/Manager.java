@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import christmas.domain.badge.Badges;
+import christmas.domain.event.Benefit;
 import christmas.domain.event.DiscountEventPolicy;
 import christmas.domain.event.GiftEventPolicy;
 import christmas.domain.human.Date;
@@ -20,6 +21,7 @@ public class Manager {
     private Money benefitAmount;
     private GiftEventPolicy giftEventPolicy;
     private DiscountEventPolicy discountEventPolicy;
+    private Benefit benefit;
 
     public Manager() {
         this.inputView = new InputView();
@@ -42,9 +44,10 @@ public class Manager {
 
         discountEventPolicy = new DiscountEventPolicy(menus, money, date);
         giftEventPolicy = new GiftEventPolicy(money);
+        benefit = new Benefit(discountEventPolicy, giftEventPolicy);
 
         discountAmount = new Money(discountEventPolicy.getTotalDiscount());
-        benefitAmount = new Money(discountEventPolicy.getTotalBenefit());
+        benefitAmount = new Money(benefit.getTotalBenefit());
     }
 
     private void display() {
@@ -53,9 +56,9 @@ public class Manager {
         outputView.displayMoney(money);
         outputView.displayEvent();
         outputView.displayGift(giftEventPolicy.getGiftResult(), giftEventPolicy.isGiftNone());
-        outputView.displayDiscountReceipt(discountEventPolicy.getDiscountReceipt(), discountEventPolicy.isDiscountAllNone());
-        outputView.displayDiscountAmount(discountAmount);
-        outputView.displayRealFee(money, benefitAmount);
-        outputView.displayBadge(Badges.badgeMeetingConditions(discountEventPolicy));
+        outputView.displayBenefitReceipt(benefit.getBenefitReceipt(), benefit.isNoneOfBenefit());
+        outputView.displayDiscountAmount(benefitAmount);
+        outputView.displayRealFee(money, discountAmount);
+        outputView.displayBadge(Badges.badgeMeetingConditions(benefit));
     }
 }

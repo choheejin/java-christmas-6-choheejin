@@ -52,6 +52,7 @@ public class InputView implements ICondition {
             inputMenu = new HashMap<>();
 
             initMenus(inputSeparateByComa);
+            validateMenus();
         } catch (IllegalArgumentException exception) {
             System.out.println(ErrorMessage.NOT_VALIDATE_MENU.getMessage());
             readMenu();
@@ -90,8 +91,10 @@ public class InputView implements ICondition {
         if (isMeetsMenuCountConditions(inputMenu)) {
             throw new IllegalArgumentException();
         }
+    }
 
-        if (isMeetsMenuConditions(inputMenu)) {
+    private void validateMenus() throws IllegalArgumentException {
+        if(isMeetsMenuConditions(inputMenu)) {
             throw new IllegalArgumentException();
         }
     }

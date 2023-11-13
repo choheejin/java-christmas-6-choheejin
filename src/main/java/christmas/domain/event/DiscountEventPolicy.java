@@ -15,37 +15,20 @@ public class DiscountEventPolicy implements ICondition {
     private final Menus menus;
     private final Money money;
     private final Date date;
-    private final GiftEventPolicy gift;
-    private Map<String, Integer> result;
+    private Map<Event, Integer> result;
 
     public DiscountEventPolicy(Menus menus, Money money, Date date) {
         this.menus = menus;
         this.money = money;
         this.date = date;
 
-        this.gift = new GiftEventPolicy(money);
         this.result = new HashMap<>();
 
         setDiscountAmount();
     }
 
-    public int getTotalBenefit() {
-        return result
-                .entrySet()
-                .stream()
-                .filter(entry -> !entry.getKey().equals(Event.GIFT.getName()))
-                .map(Map.Entry::getValue)
-                .mapToInt(Integer::intValue)
-                .sum();
-    }
-
     public int getTotalDiscount() {
         return result.values().stream().mapToInt(Integer::intValue).sum();
-    }
-
-    public boolean isTotalDiscountExceedStandard(int std) {
-        int totalDiscount = getTotalDiscount();
-        return totalDiscount >= std;
     }
 
     public boolean isDiscountAllNone() {
@@ -53,7 +36,7 @@ public class DiscountEventPolicy implements ICondition {
         return filterResult.intValue() == 0;
     }
 
-    public Map<String, Integer> getDiscountReceipt() {
+    public Map<Event, Integer> getDiscountReceipt() {
         return result.entrySet().stream().filter(entry -> entry.getValue() != 0).collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
@@ -63,7 +46,6 @@ public class DiscountEventPolicy implements ICondition {
             weekdayEvent();
             weekendEvent();
             specialEvent();
-            giftEvent();
         }
     }
 
@@ -72,7 +54,7 @@ public class DiscountEventPolicy implements ICondition {
         if (date.isDayBelowStandard(END_DATE)) {
             discount = Event.getChristmasDiscount(date.getDifferenceBaseDate(START_DATE));
         }
-        result.put(Event.CHRISTMAS.getName(), discount);
+        result.put(Event.CHRISTMAS, discount);
     }
 
     private void weekdayEvent() {
@@ -80,7 +62,7 @@ public class DiscountEventPolicy implements ICondition {
         if (date.isWeekday()) {
             discount = Event.getWeekDayDiscount(menus.getDessertCount());
         }
-        result.put(Event.WEEKDAY.getName(), discount);
+        result.put(Event.WEEKDAY, discount);
     }
 
     private void weekendEvent() {
@@ -88,7 +70,7 @@ public class DiscountEventPolicy implements ICondition {
         if (date.isWeekend()) {
             discount = Event.getWeekEndDiscount(menus.getMainCount());
         }
-        result.put(Event.WEEKEND.getName(), discount);
+        result.put(Event.WEEKEND, discount);
     }
 
     private void specialEvent() {
@@ -96,12 +78,6 @@ public class DiscountEventPolicy implements ICondition {
         if (date.isSpecialDay()) {
             discount = Event.getSpecialDiscount();
         }
-        result.put(Event.SPECIAL.getName(), discount);
-    }
-
-    private void giftEvent() {
-        if (!gift.isGiftNone()) {
-            result.put(Event.GIFT.getName(), gift.getGiftDiscount());
-        }
+        result.put(Event.SPECIAL, discount);
     }
 }

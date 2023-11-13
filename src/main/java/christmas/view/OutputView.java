@@ -1,6 +1,7 @@
 package christmas.view;
 
 import christmas.domain.badge.Badges;
+import christmas.domain.event.Event;
 import christmas.domain.human.Menus;
 import christmas.domain.human.Money;
 import christmas.domain.menu.Menu;
@@ -46,8 +47,8 @@ public class OutputView {
         System.out.println();
     }
 
-    public void displayDiscountReceipt(Map<String, Integer> discountResult, boolean isNone) {
-        System.out.println(OutputTittleMessage.DISCOUNT_RECEIPT.getMessage());
+    public void displayBenefitReceipt(Map<Event, Integer> discountResult, boolean isNone) {
+        System.out.println(OutputTittleMessage.BENEFIT_RECEIPT.getMessage());
         if (isNone) {
             System.out.printf(OutputDetailMessage.NONE.getMessage());
             System.out.println();

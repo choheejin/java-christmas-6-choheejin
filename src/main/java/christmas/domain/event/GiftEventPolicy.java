@@ -6,6 +6,7 @@ import christmas.domain.menu.Menu;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class GiftEventPolicy {
     private final Money money;
@@ -14,7 +15,15 @@ public class GiftEventPolicy {
     public GiftEventPolicy(Money money) {
         this.money = money;
         this.result = new HashMap<>();
-        setGiftResult();
+        setGiftChampagne();
+    }
+
+    private void setGiftChampagne() {
+        int giftCount = 0;
+        if (money.isMoneyExceedStandard(120_000)) {
+            giftCount = 1;
+        }
+        result.put(Menu.CHAMPAGNE, giftCount);
     }
 
     public boolean isGiftNone() {
@@ -30,15 +39,22 @@ public class GiftEventPolicy {
                 .sum();
     }
 
-    public Map<Menu, Integer> getGiftResult() {
-        return Collections.unmodifiableMap(result);
+    public Map<Event, Integer> getGiftEvent() {
+        Map<Event, Integer> giftEvent = new HashMap<>();
+        int discount = 0;
+        if (!isGiftNone()) {
+            discount = getGiftDiscount();
+        }
+        giftEvent.put(Event.GIFT, discount);
+        return giftEvent;
     }
 
-    private void setGiftResult() {
-        int giftCount = 0;
-        if (money.isMoneyExceedStandard(120_000)) {
-            giftCount = 1;
-        }
-        result.put(Menu.CHAMPAGNE, giftCount);
+    public Map<Event, Integer> getGiftReceipt() {
+        Map<Event, Integer> giftEvent = getGiftEvent();
+        return giftEvent.entrySet().stream().filter(entry -> entry.getValue() != 0).collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
+    public Map<Menu, Integer> getGiftResult() {
+        return Collections.unmodifiableMap(result);
     }
 }
