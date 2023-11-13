@@ -16,7 +16,7 @@ public class Date implements DateConsts{
         }
     }
 
-    public int getDayOfWeek() {
+    private int getDayOfWeek() {
         return LocalDate.of(YEAR, MONTH, day).getDayOfWeek().getValue();
     }
 
