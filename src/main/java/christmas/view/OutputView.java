@@ -5,6 +5,7 @@ import christmas.domain.event.Event;
 import christmas.domain.human.Orders;
 import christmas.domain.human.Money;
 import christmas.domain.menu.Menu;
+import christmas.view.consts.ErrorMessage;
 import christmas.view.consts.OutputDetailMessage;
 import christmas.view.consts.OutputTittleMessage;
 
@@ -17,6 +18,10 @@ public class OutputView {
 
     public OutputView() {
         this.formatter = new DecimalFormat(AMOUNT_NOTATION);
+    }
+
+    public void displayError(ErrorMessage errorMessage) {
+        System.out.println(errorMessage.getMessage());
     }
 
     public void displayMenu(Orders orders) {

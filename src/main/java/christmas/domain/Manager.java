@@ -9,6 +9,7 @@ import christmas.domain.human.Orders;
 import christmas.domain.human.Money;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import christmas.view.consts.ErrorMessage;
 
 public class Manager {
     private final InputView inputView;
@@ -29,14 +30,28 @@ public class Manager {
     }
 
     public void operate() {
-        read();
+        readDate();
+        readOrders();
         calculate();
         display();
     }
 
-    private void read() {
-        date = new Date(inputView.readDate());
-        orders = new Orders(inputView.readMenu());
+    private void readDate() {
+        try {
+            date = new Date(inputView.readDate());
+        } catch (IllegalArgumentException exception) {
+            outputView.displayError(ErrorMessage.NOT_VALIDATE_DATE);
+            readDate();
+        }
+    }
+
+    private void readOrders() {
+        try {
+            orders = new Orders(inputView.readOrders());
+        } catch (IllegalArgumentException exception) {
+            outputView.displayError(ErrorMessage.NOT_VALIDATE_MENU);
+            readOrders();
+        }
     }
 
     private void calculate() {

@@ -1,6 +1,5 @@
 package christmas.domain.event;
 
-import christmas.domain.condition.ICondition;
 import christmas.domain.human.Date;
 import christmas.domain.human.Orders;
 import christmas.domain.human.Money;

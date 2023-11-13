@@ -6,7 +6,14 @@ public class Date implements DateConsts{
     private final int day;
 
     public Date(int day) {
+        validateDate(day);
         this.day = day;
+    }
+
+    private void validateDate(int day) throws IllegalArgumentException {
+        if (day < START || day > END) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public int getDayOfWeek() {

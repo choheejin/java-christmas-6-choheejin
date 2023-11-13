@@ -1,7 +1,7 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.domain.condition.ICondition;
+import christmas.domain.event.ICondition;
 import christmas.domain.menu.Menu;
 import christmas.view.consts.ErrorMessage;
 import christmas.view.consts.InputMessage;
@@ -31,7 +31,8 @@ public class InputView implements ICondition {
             System.out.println(InputMessage.READ_DATE.getMessage());
             input = Console.readLine().trim();
 
-            validateDate(input);
+            validateNumber(input);
+            validateNone(input);
 
             date = Integer.parseInt(input);
         } catch (IllegalArgumentException exception) {
@@ -42,20 +43,20 @@ public class InputView implements ICondition {
         return date;
     }
 
-    public Map<String, Integer> readMenu() {
+    public Map<String, Integer> readOrders() {
         try {
             System.out.println(InputMessage.READ_MENU.getMessage());
             String input = Console.readLine().trim();
 
-            List<String> inputSeparateByComa = Arrays.asList(input.split(SEPARATOR_COMMA, -1));
+            validateNone(input);
 
+            List<String> inputSeparateByComa = Arrays.asList(input.split(SEPARATOR_COMMA, -1));
             inputMenu = new HashMap<>();
 
             initMenus(inputSeparateByComa);
-            validateMenus();
         } catch (IllegalArgumentException exception) {
             System.out.println(ErrorMessage.NOT_VALIDATE_MENU.getMessage());
-            readMenu();
+            readOrders();
         }
 
         return inputMenu;
@@ -87,38 +88,24 @@ public class InputView implements ICondition {
         if (inputMenu.containsKey(input)) {
             throw new IllegalArgumentException();
         }
-
-        if (isMeetsMenuCountConditions(inputMenu)) {
-            throw new IllegalArgumentException();
-        }
     }
 
-    private void validateMenus() throws IllegalArgumentException {
-        if(isMeetsMenuConditions(inputMenu)) {
+    private void validateNumber(String input) throws IllegalArgumentException {
+        if (!input.matches(R_NUMBER)) {
             throw new IllegalArgumentException();
         }
     }
 
     private void validateCount(String input) throws IllegalArgumentException {
-        if (!input.matches(R_NUMBER)) {
-            throw new IllegalArgumentException();
-        }
+        validateNumber(input);
 
         if (Integer.parseInt(input) <= 0) {
             throw new IllegalArgumentException();
         }
     }
 
-    private void validateDate(String input) throws IllegalArgumentException {
+    private void validateNone(String input) throws IllegalArgumentException {
         if (input.isBlank()) {
-            throw new IllegalArgumentException();
-        }
-
-        if (!input.matches(R_NUMBER)) {
-            throw new IllegalArgumentException();
-        }
-
-        if (Integer.parseInt(input) < DATE_START || Integer.parseInt(input) > DATE_END) {
             throw new IllegalArgumentException();
         }
     }
