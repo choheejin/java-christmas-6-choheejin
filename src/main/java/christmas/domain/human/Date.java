@@ -4,27 +4,29 @@ import java.time.LocalDate;
 
 public class Date implements DateConsts{
     private final int day;
-    private final int dayOfWeek;
 
     public Date(int day) {
         this.day = day;
-        this.dayOfWeek = LocalDate.of(YEAR, MONTH, day).getDayOfWeek().getValue();
     }
 
-    public boolean isDayBelowStandard(int std) {
-        return day <= std;
+    public int getDayOfWeek() {
+        return LocalDate.of(YEAR, MONTH, day).getDayOfWeek().getValue();
     }
 
     public int getDifferenceBaseDate(int std) {
         return day - std;
     }
 
+    public boolean isDayBelowStandard(int std) {
+        return day <= std;
+    }
+
     public boolean isWeekday() {
-        return WEEKDAY.contains(dayOfWeek);
+        return WEEKDAY.contains(getDayOfWeek());
     }
 
     public boolean isWeekend() {
-        return WEEKEND.contains(dayOfWeek);
+        return WEEKEND.contains(getDayOfWeek());
     }
 
     public boolean isSpecialDay() {
