@@ -11,6 +11,18 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DiscountEventTest {
+    @DisplayName("이벤트 참여 기본 요건을 충족하지 못해 할인 금액이 0원이다.")
+    @Test
+    void discount_할인_안됨() {
+        Orders orders = ordersNotMeetCondition();
+        Money money = new Money(orders.getTotalOrderAmount());
+        Date date = new Date(11);
+
+        DiscountEvent discountEvent = new DiscountEvent(orders, money, date);
+
+        assertThat(discountEvent.isDiscountAllNone()).isTrue();
+    }
+
     @DisplayName("할인 금액의 합계를 계산한다 - 크리스마스 디데이 할인")
     @Test
     void discount_할인금액_합계_크리스마스() {
@@ -89,7 +101,7 @@ public class DiscountEventTest {
         assertThat(discountEvent.getTotalDiscount()).isEqualTo(actualDiscount);
     }
 
-    @DisplayName("할인 금액의 합계가 0원이다.")
+    @DisplayName("할인 금액의 합계가 0원이다")
     @Test
     void discount_할인금액_0원() {
         Orders orders = ordersWithoutDessert();
@@ -115,6 +127,14 @@ public class DiscountEventTest {
                 Map.of(
                         "타파스", 2,
                         "바비큐립", 1
+                )
+        );
+    }
+
+    static Orders ordersNotMeetCondition() {
+        return new Orders(
+                Map.of(
+                        "아이스크림", 1
                 )
         );
     }
