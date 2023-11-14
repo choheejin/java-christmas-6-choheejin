@@ -74,6 +74,6 @@ public class Manager {
         outputView.displayBenefitReceipt(benefit.getBenefitReceipt(), benefit.isNoneOfBenefit());
         outputView.displayDiscountAmount(benefitAmount);
         outputView.displayRealFee(money.compareTo(discountAmount));
-        outputView.displayBadge(Badges.badgeMeetingConditions(benefit));
+        outputView.displayBadge(Badges.badgeMeetingConditions(benefitAmount));
     }
 }

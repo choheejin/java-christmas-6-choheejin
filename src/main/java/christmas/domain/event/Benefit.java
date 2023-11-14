@@ -23,11 +23,6 @@ public class Benefit {
         return discountEvent + giftEvent;
     }
 
-    public boolean isTotalBenefitExceedStandard(int std) {
-        int totalDiscount = getTotalBenefit();
-        return totalDiscount >= std;
-    }
-
     public Map<Event, Integer> getBenefitReceipt() {
         Map<Event, Integer> discountReceipt = discountEventPolicy.getDiscountReceipt();
         Map<Event, Integer> giftReceipt = giftEventPolicy.getGiftReceipt();
