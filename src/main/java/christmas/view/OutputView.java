@@ -20,8 +20,8 @@ public class OutputView {
         this.formatter = new DecimalFormat(AMOUNT_NOTATION);
     }
 
-    public void displayError(ErrorMessage errorMessage) {
-        System.out.println(errorMessage.getMessage());
+    public void displayError(String errorMessage) {
+        System.out.println(errorMessage);
     }
 
     public void displayOrders(Orders orders) {

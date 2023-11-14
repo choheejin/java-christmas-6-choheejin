@@ -45,7 +45,7 @@ public class Manager {
         try {
             date = new Date(inputView.readDate());
         } catch (IllegalArgumentException exception) {
-            outputView.displayError(ErrorMessage.NOT_VALIDATE_DATE);
+            outputView.displayError(exception.getMessage());
             readDate();
         }
     }
@@ -54,7 +54,7 @@ public class Manager {
         try {
             orders = new Orders(inputView.readOrders());
         } catch (IllegalArgumentException exception) {
-            outputView.displayError(ErrorMessage.NOT_VALIDATE_MENU);
+            outputView.displayError(exception.getMessage());
             readOrders();
         }
     }

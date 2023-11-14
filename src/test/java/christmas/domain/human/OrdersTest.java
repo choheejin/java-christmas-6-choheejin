@@ -1,5 +1,6 @@
 package christmas.domain.human;
 
+import christmas.view.consts.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,7 +18,8 @@ public class OrdersTest {
     @MethodSource("onlyBeverage")
     void orders_음료만_주문(Map<String, Integer> input) {
         assertThatThrownBy(() -> new Orders(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorMessage.NOT_VALIDATE_MENU.getMessage());
     }
 
     @DisplayName("메뉴 최대 20개 넘어갔을 때, 예외처리")

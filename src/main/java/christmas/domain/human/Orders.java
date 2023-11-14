@@ -1,6 +1,7 @@
 package christmas.domain.human;
 
 import christmas.domain.menu.Menu;
+import christmas.view.consts.ErrorMessage;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,11 +18,11 @@ public class Orders {
 
     private void validateOrders(Map<String, Integer> orders) throws IllegalArgumentException {
         if (isOnlyBeverage(orders)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.NOT_VALIDATE_MENU.getMessage());
         }
 
         if (isMenuCountExceedStandard(orders, MAXIMUM)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.NOT_VALIDATE_MENU.getMessage());
         }
     }
 
