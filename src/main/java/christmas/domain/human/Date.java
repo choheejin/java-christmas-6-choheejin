@@ -1,5 +1,7 @@
 package christmas.domain.human;
 
+import christmas.view.consts.ErrorMessage;
+
 import java.time.LocalDate;
 
 public class Date implements DateConsts{
@@ -12,7 +14,7 @@ public class Date implements DateConsts{
 
     private void validateDate(int day) throws IllegalArgumentException {
         if (day < START || day > END) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.NOT_VALIDATE_DATE.getMessage());
         }
     }
 

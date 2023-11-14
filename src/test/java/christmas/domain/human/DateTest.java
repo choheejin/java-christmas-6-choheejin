@@ -1,5 +1,6 @@
 package christmas.domain.human;
 
+import christmas.view.consts.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,7 +15,8 @@ public class DateTest {
     @ValueSource(ints = {0, 40, -1})
     void date_날짜_1_31_사이의_수(int input) {
         assertThatThrownBy(() -> new Date(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorMessage.NOT_VALIDATE_DATE.getMessage());
     }
 
     @DisplayName("입력된 날짜가 평일이다")
