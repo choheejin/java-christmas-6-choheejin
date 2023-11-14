@@ -16,8 +16,8 @@ public enum Event {
         this.defaultDiscount = defaultDiscount;
     }
 
-    public static int getChristmasDiscount(int date) {
-        return CHRISTMAS.defaultDiscount + ADDITIONAL_DISCOUNTS * date;
+    public static int getChristmasDiscount(int gap) {
+        return CHRISTMAS.defaultDiscount + ADDITIONAL_DISCOUNTS * gap;
     }
 
     public static int getWeekDayDiscount(int count) {
