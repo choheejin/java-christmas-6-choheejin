@@ -36,4 +36,14 @@ public class InputDateTest extends NsTest {
             assertThat(output()).contains(ErrorMessage.NOT_VALIDATE_DATE.getMessage());
         });
     }
+
+    @DisplayName("메뉴를 정상적으로 입력한다")
+    @ParameterizedTest
+    @ValueSource(strings = {"1", "2", "10"})
+    void input_메뉴_입력_정상(String input) {
+        assertSimpleTest(() -> {
+            run(input);
+            assertThat(output()).doesNotContain(ErrorMessage.NOT_VALIDATE_MENU.getMessage());
+        });
+    }
 }
