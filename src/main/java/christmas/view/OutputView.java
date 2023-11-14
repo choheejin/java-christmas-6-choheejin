@@ -24,7 +24,7 @@ public class OutputView {
         System.out.println(errorMessage.getMessage());
     }
 
-    public void displayMenu(Orders orders) {
+    public void displayOrders(Orders orders) {
         System.out.println(OutputTittleMessage.MENU.getMessage());
         orders.getOrders()
                 .forEach((menu, count) ->

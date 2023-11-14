@@ -18,11 +18,6 @@ public class Manager {
     private Date date;
     private Orders orders;
     private Money money;
-    private Money discountAmount;
-    private Money benefitAmount;
-    private GiftEvent giftEvent;
-    private DiscountEvent discountEvent;
-    private Benefit benefit;
 
     public Manager() {
         this.inputView = new InputView();
@@ -32,8 +27,18 @@ public class Manager {
     public void operate() {
         readDate();
         readOrders();
-        calculate();
-        display();
+        money = new Money(orders.getTotalOrderAmount());
+
+        DiscountEvent discountEvent = new DiscountEvent(orders, money, date);
+        GiftEvent giftEvent = new GiftEvent(money);
+        Benefit benefit = new Benefit(discountEvent, giftEvent);
+
+        Money discountAmount = new Money(discountEvent.getTotalDiscount());
+        Money benefitAmount = new Money(benefit.getTotalBenefit());
+
+        displayOrders();
+        displayEvent(giftEvent, benefit);
+        displayCalculate(discountAmount, benefitAmount);
     }
 
     private void readDate() {
@@ -54,26 +59,22 @@ public class Manager {
         }
     }
 
-    private void calculate() {
-        money = new Money(orders.getTotalOrderAmount());
-
-        discountEvent = new DiscountEvent(orders, money, date);
-        giftEvent = new GiftEvent(money);
-        benefit = new Benefit(discountEvent, giftEvent);
-
-        discountAmount = new Money(discountEvent.getTotalDiscount());
-        benefitAmount = new Money(benefit.getTotalBenefit());
+    private void displayOrders() {
+        outputView.displayStart();
+        outputView.displayOrders(orders);
+        outputView.displayMoney(money);
     }
 
-    private void display() {
-        outputView.displayStart();
-        outputView.displayMenu(orders);
-        outputView.displayMoney(money);
+    private void displayEvent(GiftEvent giftEvent, Benefit benefit) {
         outputView.displayEvent();
         outputView.displayGift(giftEvent.getGiftResult(), giftEvent.isGiftNone());
         outputView.displayBenefitReceipt(benefit.getBenefitReceipt(), benefit.isNoneOfBenefit());
+    }
+
+    private void displayCalculate(Money discountAmount, Money benefitAmount) {
         outputView.displayDiscountAmount(benefitAmount);
         outputView.displayRealFee(money.compareTo(discountAmount));
         outputView.displayBadge(Badges.badgeMeetingConditions(benefitAmount));
     }
+
 }
