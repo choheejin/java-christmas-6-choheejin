@@ -15,8 +15,6 @@ public class InputView implements ICondition {
     private static final String R_NUMBER = "^[\\d]*$";
     private static final String SEPARATOR_COMMA = ",";
     private static final String SEPARATOR_DASH = "-";
-    private static final int DATE_START = 1;
-    private static final int DATE_END = 31;
     private static final int MENU_IDX = 0;
     private static final int COUNT_IDX = 1;
     private static final int IDX_SIZE = 2;
