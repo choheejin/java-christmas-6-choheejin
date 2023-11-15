@@ -1,6 +1,5 @@
 package christmas.domain.event;
 
-import christmas.domain.human.Date;
 import christmas.domain.human.Money;
 import christmas.domain.human.Orders;
 import org.junit.jupiter.api.DisplayName;

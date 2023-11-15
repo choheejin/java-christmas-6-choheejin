@@ -5,11 +5,10 @@ import christmas.domain.event.Benefit;
 import christmas.domain.event.DiscountEvent;
 import christmas.domain.event.GiftEvent;
 import christmas.domain.human.Date;
-import christmas.domain.human.Orders;
 import christmas.domain.human.Money;
+import christmas.domain.human.Orders;
 import christmas.view.InputView;
 import christmas.view.OutputView;
-import christmas.view.consts.ErrorMessage;
 
 public class Manager {
     private final InputView inputView;

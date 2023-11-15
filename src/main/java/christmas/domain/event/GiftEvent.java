@@ -34,7 +34,11 @@ public class GiftEvent {
 
     public Map<Event, Integer> getGiftReceipt() {
         Map<Event, Integer> giftEvent = getGiftEvent();
-        return giftEvent.entrySet().stream().filter(entry -> entry.getValue() != 0).collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
+        return giftEvent
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() != 0)
+                .collect(Collectors.toUnmodifiableMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     private void setGiftChampagne() {

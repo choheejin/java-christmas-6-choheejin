@@ -2,11 +2,9 @@ package christmas.view;
 
 import christmas.domain.badge.Badges;
 import christmas.domain.event.Event;
-import christmas.domain.human.Date;
-import christmas.domain.human.Orders;
 import christmas.domain.human.Money;
+import christmas.domain.human.Orders;
 import christmas.domain.menu.Menu;
-import christmas.view.consts.ErrorMessage;
 import christmas.view.consts.OutputDetailMessage;
 import christmas.view.consts.OutputTittleMessage;
 
@@ -50,7 +48,9 @@ public class OutputView {
             return;
         }
 
-        giftCount.forEach((key, value) -> System.out.printf(OutputDetailMessage.GIFT.getMessage() + LINE_SEPARATOR, key.getMenuName(), value));
+        giftCount.forEach((key, value) ->
+                System.out.printf(OutputDetailMessage.GIFT.getMessage() + LINE_SEPARATOR, key.getMenuName(), value)
+        );
         System.out.println();
     }
 

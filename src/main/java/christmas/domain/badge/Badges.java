@@ -1,6 +1,7 @@
 package christmas.domain.badge;
 
 import christmas.domain.human.Money;
+import christmas.view.consts.ErrorMessage;
 
 import java.util.Arrays;
 
@@ -26,6 +27,6 @@ public enum Badges {
         return Arrays.stream(Badges.values())
                 .filter(i -> money.isMoneyExceedStandard(i.money))
                 .findAny()
-                .orElseThrow();
+                .orElseThrow(() -> new RuntimeException(ErrorMessage.EXCEPTION.getMessage()));
     }
 }

@@ -9,6 +9,9 @@ import java.util.Map;
 
 public class Orders {
     private static final int MAXIMUM = 20;
+    private static final String MAIN_MENU = "메인";
+    private static final String DESSERT_MENU = "디저트";
+    private static final String BEVERAGE = "음료";
     private final Map<String, Integer> orders;
 
     public Orders(Map<String, Integer> orders) {
@@ -27,19 +30,31 @@ public class Orders {
     }
 
     private boolean isMenuCountExceedStandard(Map<String, Integer> orders, int std) {
-        return orders.values().stream().mapToInt(Integer::intValue).sum() > std;
+        int count = orders
+                .values()
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+        return count > std;
     }
 
     private boolean isOnlyBeverage(Map<String, Integer> orders) {
         int orderCount = orders.size();
-        Long beverageCount = orders.entrySet().stream().filter(menu -> Menu.isCategoryMatch(menu.getKey(), "음료")).count();
-
+        Long beverageCount = orders
+                .entrySet()
+                .stream()
+                .filter(menu -> Menu.isCategoryMatch(menu.getKey(), BEVERAGE))
+                .count();
         return beverageCount.intValue() == orderCount;
     }
 
 
     public int getTotalOrderAmount() {
-        List<Integer> prizes = orders.entrySet().stream().map(menu -> Menu.getMenusPrize(menu.getKey()) * menu.getValue()).toList();
+        List<Integer> prizes = orders
+                .entrySet()
+                .stream()
+                .map(menu -> Menu.getMenusPrize(menu.getKey()) * menu.getValue())
+                .toList();
         return prizes.stream().mapToInt(Integer::intValue).sum();
     }
 
@@ -47,16 +62,16 @@ public class Orders {
         return orders
                 .entrySet()
                 .stream()
-                .filter(menu -> Menu.isCategoryMatch(menu.getKey(), "메인"))
+                .filter(menu -> Menu.isCategoryMatch(menu.getKey(), MAIN_MENU))
                 .map(Map.Entry::getValue)
                 .mapToInt(Integer::intValue).sum();
     }
 
-    public int getDessertCount() {
+        public int getDessertCount() {
         return orders
                 .entrySet()
                 .stream()
-                .filter(menu -> Menu.isCategoryMatch(menu.getKey(), "디저트"))
+                .filter(menu -> Menu.isCategoryMatch(menu.getKey(), DESSERT_MENU))
                 .map(Map.Entry::getValue)
                 .mapToInt(Integer::intValue).sum();
     }

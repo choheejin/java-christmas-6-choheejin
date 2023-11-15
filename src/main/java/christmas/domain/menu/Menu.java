@@ -1,5 +1,7 @@
 package christmas.domain.menu;
 
+import christmas.view.consts.ErrorMessage;
+
 import java.util.Arrays;
 
 public enum Menu {
@@ -35,15 +37,23 @@ public enum Menu {
     }
 
     public static int getMenusPrize(String name) {
-        Menu filterMenu = Arrays.stream(Menu.values()).filter(menu -> menu.name.equals(name)).findAny().orElseThrow();
+        Menu filterMenu = Arrays
+                .stream(Menu.values())
+                .filter(menu -> menu.name.equals(name))
+                .findAny()
+                .orElseThrow(() -> new RuntimeException(ErrorMessage.EXCEPTION.getMessage()));
         return filterMenu.prize;
     }
 
     public static boolean isCategoryMatch(String name, String category) {
-        return Arrays.stream(Menu.values()).anyMatch(menu -> menu.category.equals(category) && menu.name.equals(name));
+        return Arrays
+                .stream(Menu.values())
+                .anyMatch(menu -> menu.category.equals(category) && menu.name.equals(name));
     }
 
     public static boolean isContainMenu(String name) {
-        return Arrays.stream(Menu.values()).anyMatch(menu -> menu.name.equals(name));
+        return Arrays
+                .stream(Menu.values())
+                .anyMatch(menu -> menu.name.equals(name));
     }
 }
