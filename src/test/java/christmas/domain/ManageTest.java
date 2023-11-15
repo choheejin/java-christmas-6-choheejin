@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import christmas.view.consts.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -175,6 +176,24 @@ public class ManageTest extends NsTest {
         assertSimpleTest(() -> {
             run("3", "시저샐러드-1,바비큐립-2,제로콜라-2");
             assertThat(output()).contains(actualTitle + LINE_SEPARATOR + actualBadge);
+        });
+    }
+
+    @DisplayName("음료만 주문 시, 에러 문구 출력")
+    @Test
+    void manage_음료_주문시_에러() {
+        assertSimpleTest(() -> {
+            runException("3", "제로콜라-2");
+            assertThat(output()).contains(ErrorMessage.NOT_VALIDATE_MENU.getMessage());
+        });
+    }
+
+    @DisplayName("날짜 입력 시, 1~31 사이의 수가 아닐 때 에러 문구 출력")
+    @Test
+    void manage_날짜_입력_에러() {
+        assertSimpleTest(() -> {
+            runException("41");
+            assertThat(output()).contains(ErrorMessage.NOT_VALIDATE_DATE.getMessage());
         });
     }
 }
