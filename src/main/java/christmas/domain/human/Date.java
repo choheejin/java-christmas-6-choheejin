@@ -41,4 +41,8 @@ public class Date implements DateConsts{
     public boolean isSpecialDay() {
         return SPECIAL_DAY.contains(day);
     }
+
+    public int getDay() {
+        return day;
+    }
 }

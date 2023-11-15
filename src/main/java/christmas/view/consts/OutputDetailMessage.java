@@ -14,9 +14,6 @@ public enum OutputDetailMessage {
     }
 
     public String getMessage() {
-        return message + System.lineSeparator();
-    }
-    public String getMessageNoSeparator() {
         return message;
     }
 }

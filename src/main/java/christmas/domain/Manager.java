@@ -25,9 +25,8 @@ public class Manager {
     }
 
     public void operate() {
-        readDate();
-        readOrders();
-        money = new Money(orders.getTotalOrderAmount());
+        outputView.displayStart();
+        readInputs();
 
         DiscountEvent discountEvent = new DiscountEvent(orders, money, date);
         GiftEvent giftEvent = new GiftEvent(money);
@@ -39,6 +38,12 @@ public class Manager {
         displayOrders();
         displayEvent(giftEvent, benefit);
         displayCalculate(discountAmount, benefitAmount);
+    }
+
+    private void readInputs() {
+        readDate();
+        readOrders();
+        money = new Money(orders.getTotalOrderAmount());
     }
 
     private void readDate() {
@@ -60,13 +65,12 @@ public class Manager {
     }
 
     private void displayOrders() {
-        outputView.displayStart();
+        outputView.displayEvent(date.getDay());
         outputView.displayOrders(orders);
         outputView.displayMoney(money);
     }
 
     private void displayEvent(GiftEvent giftEvent, Benefit benefit) {
-        outputView.displayEvent();
         outputView.displayGift(giftEvent.getGiftResult(), giftEvent.isGiftNone());
         outputView.displayBenefitReceipt(benefit.getBenefitReceipt(), benefit.isNoneOfBenefit());
     }
