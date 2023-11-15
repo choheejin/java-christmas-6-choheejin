@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class GiftEvent {
     private static final int MINIMUM = 120_000;
     private final Money money;
-    private Map<Menu, Integer> result;
+    private final Map<Menu, Integer> result;
 
     public GiftEvent(Money money) {
         this.money = money;
